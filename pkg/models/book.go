@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/manjurulhoque/go-bookstore/pkg/config"
+	"time"
 )
 
 var db *gorm.DB
@@ -12,6 +13,19 @@ type Book struct {
 	Name        string `gorm:"" json:"name"`
 	Author      string `json:"author"`
 	Publication string `json:"publication"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
+	DeletedAt   time.Time `json:"deleted_at"`
+}
+
+type GetBook struct {
+	Id          int64  `gorm:"" json:"id"`
+	Name        string `gorm:"" json:"name"`
+	Author      string `json:"author"`
+	Publication string `json:"publication"`
+	CreatedAt   string `json:"created_at"`
+	UpdatedAt   string `json:"updated_at"`
+	DeletedAt   string `json:"deleted_at"`
 }
 
 func init() {
@@ -40,6 +54,6 @@ func GetBookById(Id int64) (*Book, *gorm.DB) {
 
 func DeleteBook(Id int64) Book {
 	var book Book
-	db.Where("ID=?", Id).Delete(book)
+	db.Unscoped().Where("ID=?", Id).Delete(book)
 	return book
 }

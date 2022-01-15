@@ -6,10 +6,15 @@ import (
 	"github.com/manjurulhoque/go-bookstore/pkg/routes"
 	"log"
 	"net/http"
+	"path/filepath"
 )
 
 func main() {
-	err := godotenv.Load()
+	envPath, err := filepath.Abs("./../../")
+	if err != nil {
+		panic(err)
+	}
+	err = godotenv.Load(envPath + "/.env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -17,5 +22,5 @@ func main() {
 	r := mux.NewRouter()
 	routes.RegisterBookStoreRoutes(r)
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe("localhost:9010", r))
+	log.Fatal(http.ListenAndServe("localhost:8080", r))
 }
