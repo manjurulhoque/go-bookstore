@@ -3,30 +3,29 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/manjurulhoque/go-bookstore/pkg/config"
-	"time"
 )
 
 var db *gorm.DB
 
 type Book struct {
 	gorm.Model
-	Name        string `gorm:"" json:"name"`
-	Author      string `json:"author"`
-	Publication string `json:"publication"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
-	DeletedAt   time.Time `json:"deleted_at"`
+	Name        string    `gorm:"" json:"name" validate:"required,min=4"`
+	Author      string    `json:"author" validate:"required"`
+	Publication string    `json:"publication" validate:"required"`
+	//CreatedAt   time.Time `json:"created_at"`
+	//UpdatedAt   time.Time `json:"updated_at"`
+	//DeletedAt   time.Time `json:"deleted_at"`
 }
 
-type GetBook struct {
-	Id          int64  `gorm:"" json:"id"`
-	Name        string `gorm:"" json:"name"`
-	Author      string `json:"author"`
-	Publication string `json:"publication"`
-	CreatedAt   string `json:"created_at"`
-	UpdatedAt   string `json:"updated_at"`
-	DeletedAt   string `json:"deleted_at"`
-}
+//type GetBook struct {
+//	Id          int64  `gorm:"" json:"id"`
+//	Name        string `gorm:"" json:"name"`
+//	Author      string `json:"author"`
+//	Publication string `json:"publication"`
+//	CreatedAt   string `json:"created_at"`
+//	UpdatedAt   string `json:"updated_at"`
+//	DeletedAt   string `json:"deleted_at"`
+//}
 
 func init() {
 	config.Connect()
