@@ -6,15 +6,14 @@ import (
 	"github.com/manjurulhoque/go-bookstore/pkg/routes"
 	"log"
 	"net/http"
-	"path/filepath"
 )
 
 func main() {
-	envPath, err := filepath.Abs("./../../")
-	if err != nil {
-		panic(err)
-	}
-	err = godotenv.Load(envPath + "/.env")
+	//envPath, err := filepath.Abs("./../../")
+	//if err != nil {
+	//	panic(err)
+	//}
+	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}

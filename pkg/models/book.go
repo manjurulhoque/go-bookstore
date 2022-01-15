@@ -3,18 +3,19 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/manjurulhoque/go-bookstore/pkg/config"
+	"time"
 )
 
 var db *gorm.DB
 
 type Book struct {
-	gorm.Model
-	Name        string    `gorm:"" json:"name" validate:"required,min=4"`
-	Author      string    `json:"author" validate:"required"`
-	Publication string    `json:"publication" validate:"required"`
-	//CreatedAt   time.Time `json:"created_at"`
-	//UpdatedAt   time.Time `json:"updated_at"`
-	//DeletedAt   time.Time `json:"deleted_at"`
+	ID          uint       `gorm:"primary_key" json:"id"`
+	CreatedAt   time.Time  `gorm:"created_at" json:"created_at"`
+	UpdatedAt   time.Time  `gorm:"updated_at" json:"updated_at"`
+	DeletedAt   *time.Time `gorm:"deleted_at" sql:"index" json:"deleted_at"`
+	Name        string     `gorm:"name" json:"name" validate:"required,min=4"`
+	Author      string     `gorm:"author" json:"author" validate:"required"`
+	Publication string     `gorm:"publication" json:"publication" validate:"required"`
 }
 
 //type GetBook struct {
